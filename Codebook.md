@@ -10,12 +10,19 @@ See README file
 THE FILES (raw data):
 ==================
 testSet: Test set, containing recorded variables
+
 testLabels: Test labels, identifying the activity
+
 trainSet: Training set, containing recorded variables
+
 trainLabels: Training labels, identifying the activity
+
 activityLabels: Links the class labels with their activty name
+
 features: List of all features (time and frequency variables)
+
 testSubject: Identifies the subject who performed the activity
+
 trainSubject: Identifies the subject who performed the activity
 
 
