@@ -15,6 +15,7 @@ that does the following.
 ##This repository includes:
 
 This README.md file
+
 A Codebook.md file which describes the variables, the data, and any transformations or work that you performed to clean up
 
 The run_analysis.R code used to create the tidy data set
