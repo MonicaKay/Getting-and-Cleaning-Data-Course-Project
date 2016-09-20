@@ -1,14 +1,34 @@
-GETTING AND CLEANING DATA COURSE PROJECT
-CODEBOOK
+#CODEBOOK
+
+##Project Description
+
+The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set.  The objective is to create one R script called run_analysis.R 
+
+that does the following.
+
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement.
+3. Uses descriptive activity names to name the activities in the data set
+4. Appropriately labels the data set with descriptive variable names.
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 
-THE DATA:
-==================
-See README file
+##Data Source:
+
+Raw data was obtained from the UCI WebSite: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
 
-THE FILES (raw data):
-==================
+##Information about the Data:
+
+An experiment was completed, with a group of 30 volunteers within the ages of 19-48.  Data was collected from the accelerometers from the Samsung Galaxy S smartphone.  
+
+Each person performed six activities wearing a smartphone on their waist (SITTING, STANDING, LAYING, WALKING, WALKING_DOWNSTAIRS, WALKING_UPSTAIRS).  A total of 561 
+
+time and frequency variables were recorded.  The obtained datasetS were randomly separated into a training and test datasets (70% and 30% respectfully).
+
+
+##The Data:
+
 testSet: Test set, containing recorded variables
 
 testLabels: Test labels, identifying the activity
@@ -26,51 +46,21 @@ testSubject: Identifies the subject who performed the activity
 trainSubject: Identifies the subject who performed the activity
 
 
-RAW DATA VARIABLES:
-==================
-> str(testSet)
-'data.frame':	2947 obs. of  561 variables:
- $ V1  : num  0.257 0.286 0.275 0.27 0.275 ...
- $ V2  : num  -0.0233 -0.0132 -0.0261 -0.0326 -0.0278 ...
- $ V3  : num  -0.0147 -0.1191 -0.1182 -0.1175 -0.1295 ...
- $ V4  : num  -0.938 -0.975 -0.994 -0.995 -0.994 ...
- $ V5  : num  -0.92 -0.967 -0.97 -0.973 -0.967 ...
-  [list output truncated]
+##Transformation Details
 
-> str(testLabels)
-'data.frame':	2947 obs. of  1 variable:
- $ V1: int  5 5 5 5 5 5 5 5 5 5 ...
+All files were loaded using read.table().
 
-> str(trainSet)
-'data.frame':	7352 obs. of  561 variables:
- $ V1  : num  0.289 0.278 0.28 0.279 0.277 ...
- $ V2  : num  -0.0203 -0.0164 -0.0195 -0.0262 -0.0166 ...
- $ V3  : num  -0.133 -0.124 -0.113 -0.123 -0.115 ...
- $ V4  : num  -0.995 -0.998 -0.995 -0.996 -0.998 ...
- $ V5  : num  -0.983 -0.975 -0.967 -0.983 -0.981 ...
+activityLabels$V2 was coverted to a character vector, then a for loop was used to match the label numbers (in testLabel and trainLabel) and replace with the 
 
-> str(trainLabels)
-'data.frame':	7352 obs. of  1 variable:
- $ V1: int  5 5 5 5 5 5 5 5 5 5 ...
+descriptive name.
 
-> str(activityLabels)
-'data.frame':	6 obs. of  2 variables:
- $ V1: int  1 2 3 4 5 6
- $ V2: Factor w/ 6 levels "LAYING","SITTING",..: 4 6 5 2 3 1
+features$V2 was converted to a character vector and then used to rename the columns to a more descriptive name in the testSet and trainSet dataframes.
 
-> str(features)
-'data.frame':	561 obs. of  1 variable:
- $ V2: Factor w/ 477 levels "angle(tBodyAccJerkMean),gravityMean)",..: 243 244 245 250 251 252 237 238 239 240 ...
+Create a trainDF and testDF, using cbind on the ...Subject, ...Label, and ...Set dataframes.  
+analysisDF was created using rbind of trainDF and testDF
 
-> str(testSubject)
-'data.frame':	2947 obs. of  1 variable:
- $ V1: int  2 2 2 2 2 2 2 2 2 2 ...
+Column names were changed to descriptive names
 
-> str(trainSubject)
-'data.frame':	7352 obs. of  1 variable:
- $ V1: int  1 1 1 1 1 1 1 1 1 1 ...
+Used grepl and regular expressions to extract only the measurements on the mean and standard deviation for each measurement
 
-
-TRANSFORMATIONS:
-==================
-See README file
+Reshape the data using melt and dcast.  This wa used to find the average of each variable for each activity and each subject.
